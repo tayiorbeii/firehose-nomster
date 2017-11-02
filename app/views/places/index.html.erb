@@ -6,4 +6,8 @@
       <p><%= place.description %></p><br />
     </div>
   <% end %>
+
+  <div class="col-10 offset-1">
+    <%= will_paginate @places %>
+  </div>
 </h1>
