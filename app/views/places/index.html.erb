@@ -21,6 +21,11 @@
         </div>
       <% end %>
 
+      <% if place.photos.present? %>
+        <%= image_tag place.photos.last.picture, class: 'img-fluid'%>
+        <%= place.photos.last.caption%>
+      <% end %>
+
     </div>
   <% end %>
 
