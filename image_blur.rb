@@ -47,22 +47,12 @@ class Image
           rights_to_do = @distance
           lefts_to_do = @distance
 
-          blur_up(blurred_image, outer_index, inner_index, @distance)
+          # blur_up(blurred_image, outer_index, inner_index, @distance)
 
-          # Do the Ups
-          # (0..@distance).each do |index_to_blur|
-          #   if !blurred_image[outer_index - index_to_blur].nil?
-          #     if !blurred_image[outer_index - index_to_blur][inner_index].nil?
-          #       blurred_image[outer_index - index_to_blur][inner_index] = 1
-          #     end
-          #   end
-          # end
 
-          
-
-          # Do the Downs
-          (0..@distance).each do |index_to_blur|
-            if !blurred_image[outer_index + index_to_blur].nil?
+          # Horizontal
+          (-@distance..@distance).each do |index_to_blur|
+            if !original_image[outer_index + index_to_blur].nil?
               if !blurred_image[outer_index + index_to_blur][inner_index].nil?
                 puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
                 blurred_image[outer_index + index_to_blur][inner_index] = 1
