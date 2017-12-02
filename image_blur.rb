@@ -1,5 +1,5 @@
 class Image
-  def initialize(data)
+  def initialize(data, distance)
     @data = data
     @distance = distance
   end
@@ -16,26 +16,34 @@ class Image
 
     @data.each_with_index do |outer, outer_index|
       outer.each_with_index do |inner, inner_index|
+
         if inner == 1
-          # up
-          if blurred_image[outer_index - 1][inner_index]
-            blurred_image[outer_index - 1][inner_index] = 1
-          end
+          ups_to_do = @distance
+          downs_to_do = @distance
+          rights_to_do = @distance
+          lefts_to_do = @distance
 
-          # right
-          if blurred_image[outer_index][inner_index + 1]
-            blurred_image[outer_index][inner_index + 1] = 1
+        # Do the Ups
+        (0...@distance).each do |index_to_blur|
+          if !blurred_image[outer_index - index_to_blur].nil?
+            if !blurred_image[outer_index - index_to_blur][inner_index].nil?
+              blurred_image[outer_index - index_to_blur][inner_index] = 1
+            end
           end
-          
-          # down
-          if blurred_image[outer_index + 1][inner_index]
-            blurred_image[outer_index + 1][inner_index] = 1
-          end
+        end
 
-          # left
-          if blurred_image[outer_index][inner_index - 1]
-            blurred_image[outer_index][inner_index - 1] = 1
+        # Do the Downs
+        (0...@distance).each do |index_to_blur|
+          if !blurred_image[outer_index + index_to_blur].nil?
+            if !blurred_image[outer_index + index_to_blur][inner_index].nil?
+              puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
+              blurred_image[outer_index + index_to_blur][inner_index] = 1
+            end
           end
+        end
+
+        
+        
         end
       end
     end
@@ -46,17 +54,22 @@ class Image
   
 end
 
-image = Image.new([
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], 
- [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-], 3)
+pixels = [
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0, 1]
+]
+
+image = Image.new(pixels, 3)
+
 
 image.blur_image
