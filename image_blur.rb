@@ -39,8 +39,6 @@ class Image
     blurred_image = Marshal.load(original_image_data)
 
     distance_ranges = (0..@distance).map {|d| Range.new(-d, d)}.reverse
-    puts distance_ranges
-
 
     @data.each_with_index do |outer, outer_index|
       outer.each_with_index do |inner, inner_index|
@@ -54,12 +52,26 @@ class Image
           # blur_up(blurred_image, outer_index, inner_index, @distance)
 
 
-          # Horizontal
-          (-@distance..@distance).each do |index_to_blur|
-            puts "[#{outer_index}][#{inner_index + index_to_blur}]"
-            if !blurred_image[outer_index][inner_index + index_to_blur].nil?
-              blurred_image[outer_index][inner_index + index_to_blur] = 1
+          # Horizontal (working)
+          # (-@distance..@distance).each do |index_to_blur|
+          #   puts "[#{outer_index}][#{inner_index + index_to_blur}]"
+          #   if !blurred_image[outer_index][inner_index + index_to_blur].nil?
+          #     blurred_image[outer_index][inner_index + index_to_blur] = 1
+          #   end
+          # end
+
+          # ranges
+          distance_ranges.each_with_index do |fill_range, r_index|
+            # Iterate each of our possible ranges
+            fill_range.each do |index_to_blur|
+              if !(original_image_data[outer_index + r_index]).nil?
+                puts "[#{outer_index + r_index}][#{inner_index + index_to_blur}]"
+                if !original_image_data[outer_index + r_index][inner_index + index_to_blur].nil?
+                  blurred_image[outer_index + r_index][inner_index + index_to_blur] = 1
+                end
+              end
             end
+            puts '****'
           end
 
         
