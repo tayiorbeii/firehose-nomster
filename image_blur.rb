@@ -24,7 +24,7 @@ class Image
           lefts_to_do = @distance
 
         # Do the Ups
-        (0...@distance).each do |index_to_blur|
+        (0..@distance).each do |index_to_blur|
           if !blurred_image[outer_index - index_to_blur].nil?
             if !blurred_image[outer_index - index_to_blur][inner_index].nil?
               blurred_image[outer_index - index_to_blur][inner_index] = 1
@@ -33,7 +33,7 @@ class Image
         end
 
         # Do the Downs
-        (0...@distance).each do |index_to_blur|
+        (0..@distance).each do |index_to_blur|
           if !blurred_image[outer_index + index_to_blur].nil?
             if !blurred_image[outer_index + index_to_blur][inner_index].nil?
               puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
