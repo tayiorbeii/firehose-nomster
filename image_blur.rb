@@ -64,7 +64,7 @@ class Image
           distance_ranges.each_with_index do |fill_range, r_index|
             # Iterate each of our possible ranges
             fill_range.each do |index_to_blur|
-              if !(original_image_data[outer_index + r_index]).nil?
+              if !original_image_data.at(outer_index + r_index).nil?
                 puts "[#{outer_index + r_index}][#{inner_index + index_to_blur}]"
                 if !original_image_data[outer_index + r_index][inner_index + index_to_blur].nil?
                   blurred_image[outer_index + r_index][inner_index + index_to_blur] = 1
