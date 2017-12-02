@@ -52,11 +52,9 @@ class Image
 
           # Horizontal
           (-@distance..@distance).each do |index_to_blur|
-            if !original_image[outer_index + index_to_blur].nil?
-              if !blurred_image[outer_index + index_to_blur][inner_index].nil?
-                puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
-                blurred_image[outer_index + index_to_blur][inner_index] = 1
-              end
+            puts "[#{outer_index}][#{inner_index + index_to_blur}]"
+            if !blurred_image[outer_index][inner_index + index_to_blur].nil?
+              blurred_image[outer_index][inner_index + index_to_blur] = 1
             end
           end
 
