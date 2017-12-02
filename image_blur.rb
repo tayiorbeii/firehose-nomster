@@ -10,6 +10,30 @@ class Image
     end
   end
 
+  def blur_up (blurred_image, outer_index, inner_index, distance)
+    (0..@distance).each do |index_to_blur|
+      if !blurred_image[outer_index - index_to_blur].nil?
+        if !blurred_image[outer_index - index_to_blur][inner_index].nil?
+          blurred_image[outer_index - index_to_blur][inner_index] = 1
+        end
+      end
+    end
+
+    return blurred_image
+  end
+
+  def blur_down (blurred_image, outer_index, inner_index, distance)
+    
+  end
+
+  def blur_right (blurred_image, outer_index, inner_index, distance)
+    
+  end
+ 
+  def blur_left (blurred_image, outer_index, inner_index, distance)
+    
+  end
+
   def blur_image
     original_image_data = Marshal.dump(@data)
     blurred_image = Marshal.load(original_image_data)
@@ -23,24 +47,28 @@ class Image
           rights_to_do = @distance
           lefts_to_do = @distance
 
-        # Do the Ups
-        (0..@distance).each do |index_to_blur|
-          if !blurred_image[outer_index - index_to_blur].nil?
-            if !blurred_image[outer_index - index_to_blur][inner_index].nil?
-              blurred_image[outer_index - index_to_blur][inner_index] = 1
-            end
-          end
-        end
+          blur_up(blurred_image, outer_index, inner_index, @distance)
 
-        # Do the Downs
-        (0..@distance).each do |index_to_blur|
-          if !blurred_image[outer_index + index_to_blur].nil?
-            if !blurred_image[outer_index + index_to_blur][inner_index].nil?
-              puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
-              blurred_image[outer_index + index_to_blur][inner_index] = 1
+          # Do the Ups
+          # (0..@distance).each do |index_to_blur|
+          #   if !blurred_image[outer_index - index_to_blur].nil?
+          #     if !blurred_image[outer_index - index_to_blur][inner_index].nil?
+          #       blurred_image[outer_index - index_to_blur][inner_index] = 1
+          #     end
+          #   end
+          # end
+
+          
+
+          # Do the Downs
+          (0..@distance).each do |index_to_blur|
+            if !blurred_image[outer_index + index_to_blur].nil?
+              if !blurred_image[outer_index + index_to_blur][inner_index].nil?
+                puts "outer: #{outer_index + index_to_blur} inner: #{inner_index}"
+                blurred_image[outer_index + index_to_blur][inner_index] = 1
+              end
             end
           end
-        end
 
         
         
