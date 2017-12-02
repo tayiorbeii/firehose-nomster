@@ -38,6 +38,10 @@ class Image
     original_image_data = Marshal.dump(@data)
     blurred_image = Marshal.load(original_image_data)
 
+    distance_ranges = (0..@distance).map {|d| Range.new(-d, d)}.reverse
+    puts distance_ranges
+
+
     @data.each_with_index do |outer, outer_index|
       outer.each_with_index do |inner, inner_index|
 
